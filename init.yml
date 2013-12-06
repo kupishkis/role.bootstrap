@@ -1,0 +1,5 @@
+- name: Prepare system
+  hosts: all
+  gather_facts: false
+  tasks:
+    - raw: sudo apt-get install --yes python-simplejson
