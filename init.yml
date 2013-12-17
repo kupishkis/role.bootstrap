@@ -1,4 +1,4 @@
-- name: Prepare system
+- name: install python and simplejson
   hosts: all
   gather_facts: false
   tasks:
