@@ -1,8 +1,9 @@
-- name: install python and simplejson
+- name: bootstrap
   hosts: all
   gather_facts: false
   tasks:
-    - raw: |
+    - name: raw sudo and python install
+      raw: |
             # If using root user -- ensure sudo exists.
             if [[ $UID -eq 0 ]]; then
               apt-get install --yes sudo
