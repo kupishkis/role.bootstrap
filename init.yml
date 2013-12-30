@@ -4,7 +4,7 @@
   tasks:
     - raw: |
             # If using root user -- ensure sudo exists.
-            if [[ $UID -e 0 ]]; then
+            if [[ $UID -eq 0 ]]; then
               apt-get install --yes sudo
             fi
             # Now install python
