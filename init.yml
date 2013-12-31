@@ -4,9 +4,19 @@
   tasks:
     - name: raw sudo and python install
       raw: |
-            # If using root user -- ensure sudo exists.
+            # If using root user -- ensure sudo exists and knows the hostname
             if [[ $UID -eq 0 ]]; then
               apt-get install --yes sudo
+              grep -n 127.0.1.1 /etc/hosts
+              if [[ $? -eq 0]]; then
+                #replace the line
+                sed -i "/127.0.1.1/c \
+                127.0.1.1 `hostname`.local `hostname`" /etc/hosts
+              else
+                #insert the line
+                sed -i "/127.0.0.1/a \
+                127.0.1.1 `hostname`.local `hostname`" /etc/hosts
+              fi
             fi
             # Now install python
             sudo apt-get install --yes python-simplejson
