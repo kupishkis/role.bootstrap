@@ -19,4 +19,4 @@
               fi
             fi
             # Now install python, aptitude
-            sudo apt-get install --yes python-simplejson aptitude
+            sudo apt-get install --yes python-simplejson python-apt aptitude
