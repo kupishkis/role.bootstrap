@@ -18,5 +18,5 @@
                 127.0.1.1 `hostname`.local `hostname`" /etc/hosts
               fi
             fi
-            # Now install python
-            sudo apt-get install --yes python-simplejson
+            # Now install python, aptitude
+            sudo apt-get install --yes python-simplejson aptitude
