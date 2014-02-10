@@ -4,6 +4,12 @@
   tasks:
     - name: raw sudo and python install
       raw: |
+            # Refresh apt-cache
+            if [[ $UID -eq 0 ]]; then
+                apt-get update
+            else
+                sudo apt-get update
+            fi
             # If using root user -- ensure sudo exists and knows the hostname
             if [[ $UID -eq 0 ]]; then
               apt-get install --yes sudo
