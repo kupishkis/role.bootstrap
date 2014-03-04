@@ -2,6 +2,9 @@
   hosts: all
   gather_facts: false
   tasks:
+    - name: add local mirror
+      raw: |
+          sudo sed -i -e 's/http\.us/ftp\.lt/g' /etc/apt/sources.list;
     - name: raw sudo and python install
       raw: |
             # Refresh apt-cache
