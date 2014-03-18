@@ -8,8 +8,8 @@
                 PREFIX=sudo
             fi
             # Refresh apt-cache
-            ${PREFIX} apt-get update
             ${PREFIX} sed -i -e 's/http\.us/ftp\.lt/g' /etc/apt/sources.list;
+            ${PREFIX} apt-get update
             # If using root user -- ensure sudo exists and knows the hostname
             if [[ $UID -eq 0 ]]; then
               apt-get install --yes sudo
