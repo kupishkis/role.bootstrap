@@ -4,6 +4,7 @@
   tasks:
     - name: raw sudo and python install
       raw: |
+            export DEBIAN_FRONTEND=noninteractive
             if [[ $UID -ne 0 ]]; then
                 PREFIX=sudo
             fi
