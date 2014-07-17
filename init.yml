@@ -2,7 +2,14 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: raw sudo and python install
+    - name: determine packet manager
+      raw: |
+          which yum > /dev/null 2> /dev/null && echo yum
+          which apt-get > /dev/null 2> /dev/null && echo apt-get
+      ignore_errors: yes
+      register: packet_manager
+
+    - name: raw sudo and python install (debian|ubuntu)
       raw: |
             export DEBIAN_FRONTEND=noninteractive
             if [[ $UID -ne 0 ]]; then
@@ -27,3 +34,14 @@
             fi
             # Now install python, aptitude
             sudo apt-get install --yes python-simplejson python-apt aptitude
+      when: '"apt-get" in packet_manager.stdout'
+
+    - name: raw python install (centos|redhat)
+      raw: |
+            if [[ $UID -ne 0 ]]; then
+                PREFIX=sudo
+            fi
+            # Refresh yum cache
+            ${PREFIX} yum update
+            ${PREFIX} yum install --assumeyes python-simplejson
+      when: '"yum" in packet_manager.stdout'
